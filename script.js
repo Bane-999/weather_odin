@@ -8,12 +8,12 @@ async function getWeatherData(city) {
 }
 
 const weatherTab = document.getElementById('weather');
+const searchCity = document.getElementById('city');
+const button = document.getElementById('button');
 
-
-const selectCity = document.getElementById('city');
-
-selectCity.addEventListener('change', function() {    
-    getWeatherData(selectCity.value).then(info => {
+button.addEventListener('click', function(event) {   
+    event.preventDefault();
+    getWeatherData(searchCity.value).then(info => {
         let tab = document.createElement('div'); 
         tab.className = 'tab';
         let cityName = document.createElement('h1');
@@ -23,7 +23,7 @@ selectCity.addEventListener('change', function() {
         
         cityName.textContent = info.name;
         tempStatus.textContent = info.tempStatus;
-        tempValue.textContent = info.temp;
+        tempValue.textContent = info.temp + " °C";
         img.setAttribute('src', `http://openweathermap.org/img/wn/${info.icon}@2x.png`);
 
         weatherTab.appendChild(tab);
